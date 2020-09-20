@@ -1,30 +1,30 @@
 $(document).ready(function () {
-  //   let obj = [];
+  // let obj = [];
 
   let obj = [
     {
       id: 1,
-      title: 'Winnie-the-Pooh',
+      name: 'Winnie-the-Pooh',
       author: 'Alan Alexander Milne',
       year: '1999',
       namePublishingHouse: 'Ababa-Gala-Maga',
       qtyOfPages: 120,
-      qtyOfBooks: 10,
+      qtyOfBooks: 0,
       rating: 0,
     },
     {
       id: 2,
-      title: ' Jeeves and Wooster stories',
+      name: 'Jeeves and Wooster stories',
       author: 'P.G.Wodehouse',
       year: '2015',
       namePublishingHouse: 'Ababa',
       qtyOfPages: 56,
-      qtyOfBooks: 5,
+      qtyOfBooks: 2,
       rating: 0,
     },
     {
       id: 3,
-      title: 'Harry Potter and the Philosopher’s Stone',
+      name: 'Harry Potter and the Philosopher’s Stone',
       author: 'J.K. Rowling',
       year: '2005',
       namePublishingHouse: 'Gala-Maga',
@@ -34,7 +34,7 @@ $(document).ready(function () {
     },
     {
       id: 4,
-      title: 'Airport',
+      name: 'Airport',
       author: 'Arthur Hailey',
       year: '2020',
       namePublishingHouse: 'Maga',
@@ -44,7 +44,7 @@ $(document).ready(function () {
     },
     {
       id: 5,
-      title: 'The Adventures of Sherlock Holmes',
+      name: 'The Adventures of Sherlock Holmes',
       author: 'Arthur Conan Doyle',
       year: '1950',
       namePublishingHouse: 'AbabaMaga',
@@ -54,14 +54,27 @@ $(document).ready(function () {
     },
   ];
 
+  let objVisitors = [];
+
+  let objCards = [];
+
   //   localStorage.setItem('data', JSON.stringify(obj));
 
   // get data from localstorage
-  let getDataFromLocSt = JSON.parse(localStorage.getItem('dataOfBooks'));
+  let getDataFromLocStBooks = JSON.parse(localStorage.getItem('dataOfBooks'));
+  let getDataFromLocStCards = JSON.parse(localStorage.getItem('dataOfCards'));
+  let getDataFromLocStVisitors = JSON.parse(localStorage.getItem('data'));
 
-  if (getDataFromLocSt === null) {
-    console.log('null');
+  if (getDataFromLocStBooks === null) {
     localStorage.setItem('dataOfBooks', JSON.stringify(obj));
+  }
+
+  if (getDataFromLocStCards === null) {
+    localStorage.setItem('dataOfCards', JSON.stringify(objCards));
+  }
+
+  if (getDataFromLocStVisitors === null) {
+    localStorage.setItem('data', JSON.stringify(objVisitors));
   }
 
   getHtml();
@@ -137,14 +150,14 @@ function clearInput() {
 
 // start - add new book
 function saveBook() {
-  let title = $('#title');
+  let name = $('#title');
   let author = $('#author');
   let year = $('#year');
   let publishingHouse = $('#publishingHouse');
   let qtyOfPages = $('#qtyOfPages');
   let qtyOfBooks = $('#qtyOfBooks');
 
-  if (title.val().length === 0) {
+  if (name.val().length === 0) {
     $('#title').css('border', '1px solid red');
     return false;
   } else {
@@ -204,7 +217,7 @@ function saveBook() {
 
   let tmp = {
     id: currentId,
-    title: title.val(),
+    name: name.val(),
     author: author.val(),
     year: year.val(),
     namePublishingHouse: publishingHouse.val(),
@@ -229,7 +242,9 @@ function saveBook() {
 
 let tmpObject;
 
-function editBook() {
+function editBook(event) {
+  console.log(event);
+
   let idTarget = Number(event.target.attributes[4].value);
 
   let dataSt = JSON.parse(localStorage.getItem('dataOfBooks'));
@@ -242,7 +257,7 @@ function editBook() {
     }
   }
 
-  $('#title_edit').val(tmpObject.title);
+  $('#title_edit').val(tmpObject.name);
   $('#author_edit').val(tmpObject.author);
   $('#year_edit').val(tmpObject.year);
   $('#author_edit').val(tmpObject.author);
@@ -253,14 +268,14 @@ function editBook() {
 
 //start - edit visitor
 function saveEditBook() {
-  let title_edit = $('#title_edit');
+  let name_edit = $('#title_edit');
   let author_edit = $('#author_edit');
   let year_edit = $('#year_edit');
   let publishingHouse_edit = $('#publishingHouse_edit');
   let qtyOfPages_edit = $('#qtyOfPages_edit');
   let qtyOfBooks_edit = $('#qtyOfBooks_edit');
 
-  if (title_edit.val().length === 0) {
+  if (name_edit.val().length === 0) {
     $('#title_edit').css('border', '1px solid red');
     return false;
   } else {
@@ -306,7 +321,7 @@ function saveEditBook() {
 
   let tmpObj = {
     id: tmpObject.id,
-    title: title_edit.val(),
+    name: title_edit.val(),
     author: author_edit.val(),
     year: year_edit.val(),
     namePublishingHouse: publishingHouse_edit.val(),
@@ -334,7 +349,7 @@ function saveEditBook() {
 } //end - edit book
 
 //start -  delete book
-function deleteBook() {
+function deleteBook(event) {
   let deleteId = Number(event.target.attributes[2].value);
 
   let data = JSON.parse(localStorage.getItem('dataOfBooks'));

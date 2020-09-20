@@ -1,0 +1,33 @@
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+
+.main {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  margin-top: 30px;
+}
+
+
+
+.top-visitors {
+  width: 50%;
+  border-right: 1px solid gray;
+  padding: 40px;
+}
+
+.top-books {
+  width: 50%;
+  border-left: 1px solid gray;
+  padding: 40px;
+}
+
+h3 {
+  margin-bottom: 30px;
+}
+
+
+
+
