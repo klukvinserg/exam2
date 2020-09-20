@@ -1,65 +1,63 @@
 $(document).ready(function () {
 
-// let obj = [];
+let obj = [];
 
-let obj = [
-  {
-    id: 1,
-    name: 'Winnie-the-Pooh',
-    author: 'Alan Alexander Milne',
-    year: '1999',
-    namePublishingHouse: 'Ababa-Gala-Maga',
-    qtyOfPages: 120,
-    qtyOfBooks: 0,
-    rating: 0,
-  },
-  {
-    id: 2,
-    name: ' Jeeves and Wooster stories',
-    author: 'P.G.Wodehouse',
-    year: '2015',
-    namePublishingHouse: 'Ababa',
-    qtyOfPages: 56,
-    qtyOfBooks: 2,
-    rating: 0,
-  },
-  {
-    id: 3,
-    name: 'Harry Potter and the Philosopher’s Stone',
-    author: 'J.K. Rowling',
-    year: '2005',
-    namePublishingHouse: 'Gala-Maga',
-    qtyOfPages: 1200,
-    qtyOfBooks: 15,
-    rating: 0,
-  },
-  {
-    id: 4,
-    name: 'Airport',
-    author: 'Arthur Hailey',
-    year: '2020',
-    namePublishingHouse: 'Maga',
-    qtyOfPages: 120,
-    qtyOfBooks: 10,
-    rating: 0,
-  },
-  {
-    id: 5,
-    name: 'The Adventures of Sherlock Holmes',
-    author: 'Arthur Conan Doyle',
-    year: '1950',
-    namePublishingHouse: 'AbabaMaga',
-    qtyOfPages: 500,
-    qtyOfBooks: 10,
-    rating: 0,
-  },
-];
+// let obj = [
+//   {
+//     id: 1,
+//     name: 'Winnie-the-Pooh',
+//     author: 'Alan Alexander Milne',
+//     year: '1999',
+//     namePublishingHouse: 'Ababa-Gala-Maga',
+//     qtyOfPages: 120,
+//     qtyOfBooks: 0,
+//     rating: 0,
+//   },
+//   {
+//     id: 2,
+//     name: 'Jeeves and Wooster stories',
+//     author: 'P.G.Wodehouse',
+//     year: '2015',
+//     namePublishingHouse: 'Ababa',
+//     qtyOfPages: 56,
+//     qtyOfBooks: 2,
+//     rating: 0,
+//   },
+//   {
+//     id: 3,
+//     name: 'Harry Potter and the Philosopher’s Stone',
+//     author: 'J.K. Rowling',
+//     year: '2005',
+//     namePublishingHouse: 'Gala-Maga',
+//     qtyOfPages: 1200,
+//     qtyOfBooks: 15,
+//     rating: 0,
+//   },
+//   {
+//     id: 4,
+//     name: 'Airport',
+//     author: 'Arthur Hailey',
+//     year: '2020',
+//     namePublishingHouse: 'Maga',
+//     qtyOfPages: 120,
+//     qtyOfBooks: 10,
+//     rating: 0,
+//   },
+//   {
+//     id: 5,
+//     name: 'The Adventures of Sherlock Holmes',
+//     author: 'Arthur Conan Doyle',
+//     year: '1950',
+//     namePublishingHouse: 'AbabaMaga',
+//     qtyOfPages: 500,
+//     qtyOfBooks: 10,
+//     rating: 0,
+//   },
+// ];
 
 let objVisitors = [];
 
 let objCards = [];
-
-//   localStorage.setItem('data', JSON.stringify(obj));
 
 // get data from localstorage
 let getDataFromLocStBooks = JSON.parse(localStorage.getItem('dataOfBooks'));

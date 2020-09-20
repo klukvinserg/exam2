@@ -1,83 +1,81 @@
 $(document).ready(function () {
-// let obj = [];
+  let obj = [];
 
-let obj = [
-  {
-    id: 1,
-    name: 'Winnie-the-Pooh',
-    author: 'Alan Alexander Milne',
-    year: '1999',
-    namePublishingHouse: 'Ababa-Gala-Maga',
-    qtyOfPages: 120,
-    qtyOfBooks: 0,
-    rating: 0,
-  },
-  {
-    id: 2,
-    name: ' Jeeves and Wooster stories',
-    author: 'P.G.Wodehouse',
-    year: '2015',
-    namePublishingHouse: 'Ababa',
-    qtyOfPages: 56,
-    qtyOfBooks: 2,
-    rating: 0,
-  },
-  {
-    id: 3,
-    name: 'Harry Potter and the Philosopher’s Stone',
-    author: 'J.K. Rowling',
-    year: '2005',
-    namePublishingHouse: 'Gala-Maga',
-    qtyOfPages: 1200,
-    qtyOfBooks: 15,
-    rating: 0,
-  },
-  {
-    id: 4,
-    name: 'Airport',
-    author: 'Arthur Hailey',
-    year: '2020',
-    namePublishingHouse: 'Maga',
-    qtyOfPages: 120,
-    qtyOfBooks: 10,
-    rating: 0,
-  },
-  {
-    id: 5,
-    name: 'The Adventures of Sherlock Holmes',
-    author: 'Arthur Conan Doyle',
-    year: '1950',
-    namePublishingHouse: 'AbabaMaga',
-    qtyOfPages: 500,
-    qtyOfBooks: 10,
-    rating: 0,
-  },
-];
+  // let obj = [
+  //   {
+  //     id: 1,
+  //     name: 'Winnie-the-Pooh',
+  //     author: 'Alan Alexander Milne',
+  //     year: '1999',
+  //     namePublishingHouse: 'Ababa-Gala-Maga',
+  //     qtyOfPages: 120,
+  //     qtyOfBooks: 0,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: ' Jeeves and Wooster stories',
+  //     author: 'P.G.Wodehouse',
+  //     year: '2015',
+  //     namePublishingHouse: 'Ababa',
+  //     qtyOfPages: 56,
+  //     qtyOfBooks: 2,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Harry Potter and the Philosopher’s Stone',
+  //     author: 'J.K. Rowling',
+  //     year: '2005',
+  //     namePublishingHouse: 'Gala-Maga',
+  //     qtyOfPages: 1200,
+  //     qtyOfBooks: 15,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Airport',
+  //     author: 'Arthur Hailey',
+  //     year: '2020',
+  //     namePublishingHouse: 'Maga',
+  //     qtyOfPages: 120,
+  //     qtyOfBooks: 10,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'The Adventures of Sherlock Holmes',
+  //     author: 'Arthur Conan Doyle',
+  //     year: '1950',
+  //     namePublishingHouse: 'AbabaMaga',
+  //     qtyOfPages: 500,
+  //     qtyOfBooks: 10,
+  //     rating: 0,
+  //   },
+  // ];
 
-let objVisitors = [];
+  let objVisitors = [];
 
-let objCards = [];
+  let objCards = [];
 
-//   localStorage.setItem('data', JSON.stringify(obj));
+  // get data from localstorage
+  let getDataFromLocStBooks = JSON.parse(localStorage.getItem('dataOfBooks'));
+  let getDataFromLocStCards = JSON.parse(localStorage.getItem('dataOfCards'));
+  let getDataFromLocStVisitors = JSON.parse(localStorage.getItem('data'));
 
-// get data from localstorage
-let getDataFromLocStBooks = JSON.parse(localStorage.getItem('dataOfBooks'));
-let getDataFromLocStCards = JSON.parse(localStorage.getItem('dataOfCards'));
-let getDataFromLocStVisitors = JSON.parse(localStorage.getItem('data'));
+  if (getDataFromLocStBooks === null) {
+    localStorage.setItem('dataOfBooks', JSON.stringify(obj));
+  }
 
-if (getDataFromLocStBooks === null) {
-  localStorage.setItem('dataOfBooks', JSON.stringify(obj));
-}
+  if (getDataFromLocStCards === null) {
+    localStorage.setItem('dataOfCards', JSON.stringify(objCards));
+  }
 
-if (getDataFromLocStCards === null) {
-  localStorage.setItem('dataOfCards', JSON.stringify(objCards));
-}
+  if (getDataFromLocStVisitors === null) {
+    localStorage.setItem('data', JSON.stringify(objVisitors));
+  }
 
-if (getDataFromLocStVisitors === null) {
-  localStorage.setItem('data', JSON.stringify(objVisitors));
-}
-
-getHtml();
+  getHtml();
 });
 
 // start - get html
@@ -102,13 +100,13 @@ function getHtml() {
     //   );
     // }
 
-          $('.form-control-book').append(
-        `<option key="${objBooks[i].id}" class="option option-book">${objBooks[i].name}</option>`
-      );
+    $('.form-control-book').append(
+      `<option key="${objBooks[i].id}" class="option option-book">${objBooks[i].name}</option>`
+    );
 
-      if (objBooks[i].qtyOfBooks === 0) {
-        $('.option-book').css('display', 'none')
-      }
+    if (objBooks[i].qtyOfBooks === 0) {
+      $('.option-book').css('display', 'none');
+    }
   }
 
   if (objData === null || objData.length === 0) {
@@ -162,9 +160,7 @@ function returnBook(event) {
     }
   }
 
-
   let choise = Number(event.target.attributes[3].value);
-
 
   for (let i = 0; i < objBooks.length; i++) {
     if (objBooks[i].id === choise) {
@@ -207,7 +203,6 @@ function saveCard() {
   let choiseIndexBook = $('.form-control-book')[0].parentElement.children[1]
     .options.selectedIndex;
 
-
   if (choiseIndexVisitor === 0) {
     $('.form-control-visitor').css('border', '1px solid red');
     return false;
@@ -236,7 +231,6 @@ function saveCard() {
     currentId = Math.max(...allIdCard) + 1;
   }
 
-
   let allIdVisitors = [];
 
   for (let i = 0; i < objVisitors.length; i++) {
@@ -258,10 +252,10 @@ function saveCard() {
   let bookId;
 
   objBooks.forEach((el) => {
-    if (el.id === allIdBooks[choiseIndexBook-1]) {
+    if (el.id === allIdBooks[choiseIndexBook - 1]) {
       el.rating++;
       el.qtyOfBooks--;
-      bookId = el.id
+      bookId = el.id;
     }
   });
 
