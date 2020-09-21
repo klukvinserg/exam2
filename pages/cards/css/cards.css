@@ -115,3 +115,7 @@ input {
 .navbar-brand {
   padding-top: 0;
 }
+
+.book-none {
+  display: none;
+}

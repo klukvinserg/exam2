@@ -49,12 +49,14 @@ function getHtml() {
 
   for (let i = 0; i < objBooks.length; i++) {
 
-    $('.form-control-book').append(
-      `<option key="${objBooks[i].id}" class="option option-book">${objBooks[i].name}</option>`
-    );
-
     if (objBooks[i].qtyOfBooks === 0) {
-      $('.option-book').css('display', 'none');
+      $('.form-control-book').append(
+        `<option key="${objBooks[i].id}" class="option option-book book-none">${objBooks[i].name}</option>`
+      );
+    } else {
+      $('.form-control-book').append(
+        `<option key="${objBooks[i].id}" class="option option-book">${objBooks[i].name}</option>`
+      );
     }
   }
 
