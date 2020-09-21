@@ -1,59 +1,6 @@
 $(document).ready(function () {
   let obj = [];
 
-  // let obj = [
-  //   {
-  //     id: 1,
-  //     name: 'Winnie-the-Pooh',
-  //     author: 'Alan Alexander Milne',
-  //     year: '1999',
-  //     namePublishingHouse: 'Ababa-Gala-Maga',
-  //     qtyOfPages: 120,
-  //     qtyOfBooks: 0,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Jeeves and Wooster stories',
-  //     author: 'P.G.Wodehouse',
-  //     year: '2015',
-  //     namePublishingHouse: 'Ababa',
-  //     qtyOfPages: 56,
-  //     qtyOfBooks: 2,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Harry Potter and the Philosopher’s Stone',
-  //     author: 'J.K. Rowling',
-  //     year: '2005',
-  //     namePublishingHouse: 'Gala-Maga',
-  //     qtyOfPages: 1200,
-  //     qtyOfBooks: 15,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Airport',
-  //     author: 'Arthur Hailey',
-  //     year: '2020',
-  //     namePublishingHouse: 'Maga',
-  //     qtyOfPages: 120,
-  //     qtyOfBooks: 10,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: 'The Adventures of Sherlock Holmes',
-  //     author: 'Arthur Conan Doyle',
-  //     year: '1950',
-  //     namePublishingHouse: 'AbabaMaga',
-  //     qtyOfPages: 500,
-  //     qtyOfBooks: 10,
-  //     rating: 0,
-  //   },
-  // ];
-
   let objVisitors = [];
 
   let objCards = [];
@@ -77,10 +24,10 @@ $(document).ready(function () {
 
   getHtml();
 
-  $("#myInput").on("keyup", function() {
+  $('#myInput').on('keyup', function () {
     let value = $(this).val().toLowerCase();
-    $("#my_table .tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $('#my_table .tr').filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
     });
   });
 });
@@ -121,9 +68,7 @@ function getHtml() {
         .addClass('edit')
         .attr('data-toggle', 'modal')
         .attr('data-target', '#exampleModalEdit')
-        .html(
-          `<img src="https://www.iconfinder.com/data/icons/edition/100/pen_2-512.png" alt="edit" key=${objData[i].id}>`
-        )
+        .html(`<img src="https://www.iconfinder.com/data/icons/edition/100/pen_2-512.png" alt="edit" key=${objData[i].id}>`)
         .attr('onclick', 'editBook(event)')
         .attr('key', `${objData[i].id}`)
     );
@@ -132,9 +77,7 @@ function getHtml() {
     $(createTr).append(
       $(createTdRemove)
         .addClass('remove')
-        .html(
-          `<img src="https://www.iconfinder.com/data/icons/flat-icons-web/40/Remove-512.png" alt="edit" key=${objData[i].id}>`
-        )
+        .html(`<img src="https://www.iconfinder.com/data/icons/flat-icons-web/40/Remove-512.png" alt="edit" key=${objData[i].id}>`)
         .attr('onclick', 'deleteBook(event)')
         .attr('key', `${objData[i].id}`)
     );
@@ -145,7 +88,6 @@ function getHtml() {
 // start - clear inputs in modal-window
 function clearInput() {
   let inpt = document.querySelectorAll('input[type=text]');
-
   for (let i = 0; i < inpt.length; i++) {
     inpt[i].style.border = '1px solid black';
     inpt[i].value = '';
@@ -176,7 +118,7 @@ function saveBook() {
     $('#author').css('border', '1px solid black');
   }
 
-  if (year.val().length === 0) {
+  if (year.val().length === 0 || Number(year.val()) < 0 || isNaN(year.val())) {
     $('#year').css('border', '1px solid red');
     return false;
   } else {
@@ -190,14 +132,22 @@ function saveBook() {
     $('#publishingHouse').css('border', '1px solid black');
   }
 
-  if (qtyOfPages.val().length === 0) {
+  if (
+    qtyOfPages.val().length === 0 ||
+    Number(qtyOfPages.val()) < 0 ||
+    isNaN(qtyOfPages.val())
+  ) {
     $('#qtyOfPages').css('border', '1px solid red');
     return false;
   } else {
     $('#qtyOfPages').css('border', '1px solid black');
   }
 
-  if (qtyOfBooks.val().length === 0) {
+  if (
+    qtyOfBooks.val().length === 0 ||
+    Number(qtyOfBooks.val()) < 0 ||
+    isNaN(qtyOfBooks.val())
+  ) {
     $('#qtyOfBooks').css('border', '1px solid red');
     return false;
   } else {
@@ -244,17 +194,12 @@ function saveBook() {
 // end - add new book
 
 // start - get value of book from localstorage in modal-window
-
 let tmpObject;
 
 function editBook(event) {
-  console.log(event);
-
   let idTarget = Number(event.target.attributes[4].value);
 
   let dataSt = JSON.parse(localStorage.getItem('dataOfBooks'));
-
-  console.log(dataSt);
 
   for (let i = 0; i < dataSt.length; i++) {
     if (dataSt[i].id === idTarget) {
@@ -356,7 +301,6 @@ function saveEditBook() {
 //start -  delete book
 function deleteBook(event) {
   let deleteId = Number(event.target.attributes[2].value);
-
   let data = JSON.parse(localStorage.getItem('dataOfBooks'));
 
   for (let i = 0; i < data.length; i++) {
@@ -385,14 +329,14 @@ function sortTable(event) {
   }
 
   let table,
-    rows,
-    switching,
-    i,
-    x,
-    y,
-    shouldSwitch,
-    dir,
-    switchcount = 0;
+      rows,
+      switching,
+      i,
+      x,
+      y,
+      shouldSwitch,
+      dir,
+      switchcount = 0;
   table = document.getElementById('my_table');
   switching = true;
   //Set the sorting direction to ascending:

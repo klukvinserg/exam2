@@ -111,3 +111,7 @@ input {
   border-radius: .25rem;
 }
 
+
+.navbar-brand {
+  padding-top: 0;
+}
