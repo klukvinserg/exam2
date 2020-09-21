@@ -76,6 +76,13 @@ $(document).ready(function () {
   }
 
   getHtml();
+
+  $("#myInput").on("keyup", function() {
+    let value = $(this).val().toLowerCase();
+    $("#my_table .tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });
 
 // start - get html
@@ -105,7 +112,7 @@ function getHtml() {
         createTd.innerText = objData[i][key];
       }
 
-      $(createTr).append(createTd);
+      $(createTr).addClass('tr').append(createTd);
     }
 
     let createTdEdit = document.createElement('td');
@@ -183,22 +190,14 @@ function saveBook() {
     $('#publishingHouse').css('border', '1px solid black');
   }
 
-  if (
-    qtyOfPages.val().length === 0 ||
-    typeof qtyOfPages.val() !== 'number' ||
-    qtyOfPages.val() < 0
-  ) {
+  if (qtyOfPages.val().length === 0) {
     $('#qtyOfPages').css('border', '1px solid red');
     return false;
   } else {
     $('#qtyOfPages').css('border', '1px solid black');
   }
 
-  if (
-    qtyOfBooks.val().length === 0 ||
-    typeof qtyOfBooks.val() !== 'number' ||
-    qtyOfBooks.val() < 0
-  ) {
+  if (qtyOfBooks.val().length === 0) {
     $('#qtyOfBooks').css('border', '1px solid red');
     return false;
   } else {
@@ -327,7 +326,7 @@ function saveEditBook() {
 
   let tmpObj = {
     id: tmpObject.id,
-    name: title_edit.val(),
+    name: name_edit.val(),
     author: author_edit.val(),
     year: year_edit.val(),
     namePublishingHouse: publishingHouse_edit.val(),
@@ -377,3 +376,72 @@ function deleteBook(event) {
 
   getHtml();
 } //end - delete book
+
+function sortTable(event) {
+  let n = $('.form-control-sort')[0].options.selectedIndex;
+
+  if (n === 3) {
+    n = 6;
+  }
+
+  let table,
+    rows,
+    switching,
+    i,
+    x,
+    y,
+    shouldSwitch,
+    dir,
+    switchcount = 0;
+  table = document.getElementById('my_table');
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = 'asc';
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < rows.length - 1; i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName('TD')[n];
+      y = rows[i + 1].getElementsByTagName('TD')[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == 'asc') {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == 'desc') {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == 'asc') {
+        dir = 'desc';
+        switching = true;
+      }
+    }
+  }
+}

@@ -68,22 +68,30 @@
         </button>
       </div>
       <div class="header-bottom">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ID
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Name</a>
-              <a class="dropdown-item" href="#">Phone</a>
-            </div>
-          </div>
+        <div class="drop">
+          <span> Sort by: </span>
+
+          <label>
+            <select class="form-control form-control-sort">
+              <option class="option" value="id">ID</option>
+              <option class="option" value="name">Name</option>
+            </select>
+          </label>
+
+          <button
+            type="button"
+            class="btn btn-secondary sort"
+            onclick="sortTable(event)"
+          >
+            SORT
+          </button>
+        </div>
         <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn my-2 my-sm-0 btn-outline-secondary" type="submit">Search</button>
-          </form>
+          <input placeholder="Search" aria-label="Search" id="myInput" />
+        </form>
       </div>
       <div class="wrapper-table table-responsive р-2">
-        <table>
+        <table id="my_table" class="table_sort">
           <thead>
             <tr>
               <th>ID</th>

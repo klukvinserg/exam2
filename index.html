@@ -46,17 +46,11 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link active" href="index.html">BOOKS</a>
-            <a
-              class="nav-item nav-link"
-              href="pages/visitors/visitors.html"
+            <a class="nav-item nav-link" href="pages/visitors/visitors.html"
               >VISITORS</a
             >
-            <a class="nav-item nav-link" href="pages/cards/cards.html"
-              >CARDS</a
-            >
-            <a
-              class="nav-item nav-link"
-              href="pages/statistic/statistic.html"
+            <a class="nav-item nav-link" href="pages/cards/cards.html">CARDS</a>
+            <a class="nav-item nav-link" href="pages/statistic/statistic.html"
               >STATISTIC</a
             >
           </div>
@@ -78,36 +72,32 @@
         </button>
       </div>
       <div class="header-bottom">
-        <div class="dropdown">
+        <div class="drop">
+          <span> Sort by: </span>
+
+          <label>
+            <select class="form-control form-control-sort">
+              <option class="option" value="id">ID</option>
+              <option class="option" value="title">Title</option>
+              <option class="option" value="aurhor">Author</option>
+              <option class="option" value="qty">Qty of books</option>
+            </select>
+          </label>
+
           <button
-            class="btn btn-secondary dropdown-toggle"
             type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            class="btn btn-secondary sort"
+            onclick="sortTable(event)"
           >
-            ID
+            SORT
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Name</a>
-            <a class="dropdown-item" href="#">Phone</a>
-          </div>
         </div>
         <form class="form-inline">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn my-2 my-sm-0 btn-outline-secondary" type="submit">
-            Search
-          </button>
+          <input placeholder="Search" aria-label="Search" id="myInput" />
         </form>
       </div>
       <div class="wrapper-table table-responsive р-2">
-        <table>
+        <table id="my_table" class="table_sort">
           <thead>
             <tr>
               <th>ID</th>
@@ -123,6 +113,8 @@
           </thead>
           <tbody id="table_body"></tbody>
         </table>
+        <input type="hidden" id="name_order" value="asc" />
+        <input type="hidden" id="age_order" value="asc" />
       </div>
     </div>
 
@@ -249,7 +241,7 @@
               type="button"
               onclick="saveEditBook()"
             >
-              EDIT VISITOR
+              EDIT BOOK
             </button>
           </div>
         </div>
